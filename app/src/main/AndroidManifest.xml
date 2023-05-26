@@ -10,7 +10,7 @@
             android:label="@string/app_name"
             android:icon="@mipmap/ic_launcher"
             android:supportsRtl="true"
-            android:theme="@style/Panacota">
+            android:theme="@style/Theme.Panacota.Splash">
         <activity
                 android:name=".MainActivity"
                 android:exported="true">
