@@ -13,8 +13,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:adjustViewBounds="true"
-        android:foreground="#45000000"
-        />
+        android:foreground="#45000000"/>
 
     <TextView
         android:id="@+id/general_text"
@@ -28,9 +27,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/searchbar_background"
-        app:layout_constraintBottom_toBottomOf="@+id/searchbar_background"
-
-        />
+        app:layout_constraintBottom_toBottomOf="@+id/searchbar_background"/>
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/bar_layout"
@@ -47,8 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/search_placeholder"
-            android:backgroundTint="#BFD8D8D8"
-            />
+            android:backgroundTint="#BFD8D8D8"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 
