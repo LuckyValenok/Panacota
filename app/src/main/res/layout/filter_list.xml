@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.appbar.MaterialToolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/grey"
+    app:cardCornerRadius="100dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <Spinner
+        android:id="@+id/select_list"
+        android:layout_width="327dp"
+        android:layout_height="49dp"
+        android:background="@color/grey"
+        android:popupBackground="@color/grey"
+        android:spinnerMode="dropdown"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/filter_image"
+        app:layout_constraintStart_toEndOf="@+id/select_list"
+        app:layout_constraintTop_toTopOf="@+id/select_list"
+        app:layout_constraintBottom_toBottomOf="@+id/select_list"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.appbar.MaterialToolbar>
