@@ -24,10 +24,10 @@ class MainViewModel @Inject constructor(getRecipesByTypeUseCase: GetRecipesByTyp
                 if (response.isSuccessful) {
                     val recipes: ListRecipe = response.body()!!
                     list += Category(value, recipes.results)
+                    withContext(Dispatchers.Main) {
+                        this@MainViewModel.categories.postValue(list)
+                    }
                 }
-            }
-            withContext(Dispatchers.Main) {
-                this@MainViewModel.categories.postValue(list)
             }
         }
     }
