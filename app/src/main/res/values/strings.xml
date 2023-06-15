@@ -3,6 +3,10 @@
     <string name="search_placeholder">SEARCH</string>
     <string name="Panacota">Panacota</string>
 
+    <string name="btn_all">All</string>
+    <string name="category">Category</string>
+    <string name="filters">Filters</string>
+
     <!-- Meal types -->
     <string name="main_course">Main course</string>
     <string name="side_dish">Side dish</string>
