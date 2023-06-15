@@ -1,5 +1,21 @@
 <resources>
     <string name="app_name">Panacota</string>
-    <string name="search_placeholder">ПОИСК</string>
+    <string name="search_placeholder">SEARCH</string>
     <string name="Panacota">Panacota</string>
+
+    <!-- Meal types -->
+    <string name="main_course">Main course</string>
+    <string name="side_dish">Side dish</string>
+    <string name="dessert">Dessert</string>
+    <string name="appetizer">Appetizer</string>
+    <string name="salad">Salad</string>
+    <string name="bread">Bread</string>
+    <string name="breakfast">Breakfast</string>
+    <string name="soup">Soup</string>
+    <string name="beverage">Beverage</string>
+    <string name="sauce">Sauce</string>
+    <string name="marinade">Marinade</string>
+    <string name="fingerfood">Finger food</string>
+    <string name="snack">Snack</string>
+    <string name="drink">Drink</string>
 </resources>

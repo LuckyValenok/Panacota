@@ -26,7 +26,7 @@ class CategoriesAdapter :
     inner class CategoryViewHolder(private val binding: CategoryListBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(category: Category) = with(binding) {
-            categoryName.text = category.type.name
+            categoryName.text = root.resources.getString(category.type.getStringResource())
             recyclerInfo.adapter = RecipesAdapter(category.list)
         }
     }
