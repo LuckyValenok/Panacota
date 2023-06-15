@@ -1,15 +1,17 @@
-package net.panacota.app.ui
+package net.panacota.app.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import net.panacota.app.databinding.CategoryListBinding
 import net.panacota.app.domain.data.MealType
 import net.panacota.app.domain.data.Recipe
+import net.panacota.app.ui.fragments.MainFragmentDirections
 
-class CategoriesAdapter :
+class CategoriesAdapter(private val onClick: (Category) -> Unit) :
     ListAdapter<Category, CategoriesAdapter.CategoryViewHolder>(CategoryDiffUtil()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder =
         CategoryViewHolder(
@@ -28,6 +30,9 @@ class CategoriesAdapter :
         fun bind(category: Category) = with(binding) {
             categoryName.text = root.resources.getString(category.type.getStringResource())
             recyclerInfo.adapter = RecipesAdapter(category.list)
+            categoryButtonMore.setOnClickListener {
+                onClick(getItem(adapterPosition))
+            }
         }
     }
 

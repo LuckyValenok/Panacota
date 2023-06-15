@@ -1,4 +1,4 @@
-package net.panacota.app.ui
+package net.panacota.app.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,7 +10,9 @@ import net.panacota.app.R
 import net.panacota.app.databinding.CategoryItemBinding
 import net.panacota.app.domain.data.Recipe
 
-class RecipesAdapter(list: List<Recipe>?) : ListAdapter<Recipe, RecipesAdapter.RecipeViewHolder>(RecipeDiffUtil()) {
+class RecipesAdapter(list: List<Recipe>? = null) : ListAdapter<Recipe, RecipesAdapter.RecipeViewHolder>(
+    RecipeDiffUtil()
+) {
     init {
         submitList(list)
     }

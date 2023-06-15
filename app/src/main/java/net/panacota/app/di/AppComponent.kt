@@ -13,7 +13,9 @@ import net.panacota.app.domain.usecases.getRecipes.GetRecipesUseCase
 import net.panacota.app.domain.usecases.getRecipes.GetRecipesUseCaseImpl
 import net.panacota.app.domain.usecases.getRecipesByType.GetRecipesByTypeUseCase
 import net.panacota.app.domain.usecases.getRecipesByType.GetRecipesByTypeUseCaseImpl
-import net.panacota.app.ui.MainFragment
+import net.panacota.app.ui.fragments.CategoryFragment
+import net.panacota.app.ui.fragments.MainFragment
+import net.panacota.app.ui.viewmodels.CategoryViewModel
 import net.panacota.app.ui.viewmodels.MainViewModel
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -25,6 +27,8 @@ import javax.inject.Singleton
 @Singleton
 interface AppComponent {
     fun injectMainFragment(mainFragment: MainFragment)
+
+    fun injectCategoryFragment(categoryFragment: CategoryFragment)
 
     @Component.Factory
     interface AppComponentFactory {
@@ -41,6 +45,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(MainViewModel::class)
     abstract fun mainViewModel(viewModel: MainViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CategoryViewModel::class)
+    abstract fun categoryViewModel(viewModel: CategoryViewModel): ViewModel
 }
 
 @Module

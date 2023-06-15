@@ -9,7 +9,7 @@ import kotlinx.coroutines.withContext
 import net.panacota.app.domain.data.ListRecipe
 import net.panacota.app.domain.data.MealType
 import net.panacota.app.domain.usecases.getRecipesByType.GetRecipesByTypeUseCase
-import net.panacota.app.ui.Category
+import net.panacota.app.ui.adapters.Category
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(getRecipesByTypeUseCase: GetRecipesByTypeUseCase) :

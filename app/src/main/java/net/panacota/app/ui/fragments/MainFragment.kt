@@ -1,4 +1,4 @@
-package net.panacota.app.ui
+package net.panacota.app.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import net.panacota.app.MainApplication
 import net.panacota.app.databinding.MainFragmentBinding
+import net.panacota.app.ui.adapters.CategoriesAdapter
 import net.panacota.app.ui.viewmodels.MainViewModel
 import javax.inject.Inject
 
@@ -27,7 +29,10 @@ class MainFragment : Fragment() {
     ): View {
         val binding: MainFragmentBinding = MainFragmentBinding.inflate(inflater, container, false)
 
-        val adapter = CategoriesAdapter()
+        val adapter = CategoriesAdapter {
+            val action = MainFragmentDirections.actionMainFragmentToCategoryFragment(it.type)
+            findNavController().navigate(action)
+        }
         binding.categories.adapter = adapter
 
         val mainViewModel = viewModelFactory.create(MainViewModel::class.java)
