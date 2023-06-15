@@ -3,6 +3,7 @@ package net.panacota.app.domain.database
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import net.panacota.app.domain.data.ListRecipe
 import net.panacota.app.domain.data.Recipe
 
 class RecipesConverter {
@@ -14,8 +15,8 @@ class RecipesConverter {
     }
 
     @TypeConverter
-    fun stringToListRecipes(str: String): List<Recipe> {
-        return gson.fromJson(str, ListRecipe::class.java).list
+    fun stringToListRecipes(str: String): ListRecipe {
+        return gson.fromJson(str, ListRecipe::class.java)
     }
 
     @TypeConverter
@@ -28,5 +29,3 @@ class RecipesConverter {
         return gson.fromJson(str, Recipe::class.java)
     }
 }
-
-data class ListRecipe(val list: List<Recipe>)

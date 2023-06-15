@@ -1,4 +1,4 @@
-package net.panacota.app.ui
+package net.panacota.app
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

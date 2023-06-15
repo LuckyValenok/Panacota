@@ -2,7 +2,7 @@ package net.panacota.app.domain.database.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import net.panacota.app.domain.database.ListRecipe
+import net.panacota.app.domain.data.ListRecipe
 
 @Entity
 data class Recipes(val recipes: ListRecipe) {
