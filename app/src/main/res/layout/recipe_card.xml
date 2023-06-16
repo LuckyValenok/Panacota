@@ -22,7 +22,7 @@
     <ImageButton
         android:layout_width="27dp"
         android:layout_height="27dp"
-        android:background=""
+        android:background="#00FFFFFF"
         android:src="@drawable/baseline_close_24_white"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
