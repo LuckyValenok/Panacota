@@ -21,4 +21,8 @@ enum class MealType(private val stringResource: Int) {
     override fun toString(): String = name.lowercase().replace('_', ' ')
 
     fun getStringResource(): Int = stringResource
+
+    companion object {
+        val ARRAY = values()
+    }
 }

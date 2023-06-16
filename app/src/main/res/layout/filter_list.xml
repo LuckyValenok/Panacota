@@ -27,6 +27,5 @@
         app:layout_constraintStart_toEndOf="@+id/select_list"
         app:layout_constraintTop_toTopOf="@+id/select_list"
         app:layout_constraintBottom_toBottomOf="@+id/select_list"/>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.appbar.MaterialToolbar>

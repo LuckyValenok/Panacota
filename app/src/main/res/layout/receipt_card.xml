@@ -14,7 +14,7 @@
         android:scaleType="centerCrop"
         android:foreground="#45000000"
         android:src="@drawable/receipt_card_image"
-        tools:ignore="ContentDescription" />
+        tools:ignore="ContentDescription"/>
 
     <TextView
         android:layout_height="wrap_content"
@@ -25,7 +25,6 @@
         android:text="Лазанья классическая с мясом"
         android:fontFamily="@font/didact_gothic"
         android:textSize="25sp"
-        android:textColor="@color/black"
-        />
+        android:textColor="@color/black"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

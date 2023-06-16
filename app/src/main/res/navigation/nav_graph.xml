@@ -20,5 +20,6 @@
       android:name="mealType"
       app:argType="net.panacota.app.domain.data.MealType"
       />
+    <action android:id="@+id/action_categoryFragment_to_mainFragment" app:destination="@id/mainFragment"/>
   </fragment>
 </navigation>

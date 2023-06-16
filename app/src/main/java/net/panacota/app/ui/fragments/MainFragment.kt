@@ -9,7 +9,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import net.panacota.app.MainApplication
 import net.panacota.app.databinding.MainFragmentBinding
+import net.panacota.app.domain.data.MealType
 import net.panacota.app.ui.adapters.CategoriesAdapter
+import net.panacota.app.ui.dialogs.CategorySelectDialog
 import net.panacota.app.ui.viewmodels.MainViewModel
 import javax.inject.Inject
 
@@ -29,11 +31,20 @@ class MainFragment : Fragment() {
     ): View {
         val binding: MainFragmentBinding = MainFragmentBinding.inflate(inflater, container, false)
 
-        val adapter = CategoriesAdapter {
-            val action = MainFragmentDirections.actionMainFragmentToCategoryFragment(it.type)
+        val onClick = { mealType: MealType ->
+            val action = MainFragmentDirections.actionMainFragmentToCategoryFragment(mealType)
             findNavController().navigate(action)
         }
-        binding.categories.adapter = adapter
+        val adapter = CategoriesAdapter {
+            onClick(it.type)
+        }
+        binding.apply {
+            categories.adapter = adapter
+            navbar.categoryButton.setOnClickListener {
+                val categorySelectDialog = CategorySelectDialog(onClick = onClick)
+                categorySelectDialog.show(this@MainFragment.parentFragmentManager, null)
+            }
+        }
 
         val mainViewModel = viewModelFactory.create(MainViewModel::class.java)
 
