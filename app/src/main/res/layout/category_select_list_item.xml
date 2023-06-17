@@ -8,7 +8,6 @@
     android:gravity="start"
     android:padding="0dp"
     android:text="@string/breakfast"
-    android:textAllCaps="true"
     android:textColor="@color/black"
     android:textSize="22sp"
     app:layout_constraintStart_toStartOf="parent"
