@@ -22,7 +22,10 @@
     <string name="fingerfood">Finger food</string>
     <string name="snack">Snack</string>
     <string name="drink">Drink</string>
+
     <string name="recipe_title">Лазанья классическая с мясом</string>
     <string name="recipe_content_title">Инструкция приготовления</string>
-    <string name="recipe_content_description">В сотейник положить сливочное масло и 2 ложки растительного масла, растопить. Постепенно добавлять муку и размешивать так, чтобы не оставалось комочков.</string>
+    <string name="summary">Summary</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="instruction">Instruction</string>
 </resources>

@@ -41,8 +41,7 @@ class MainFragment : Fragment() {
         binding.apply {
             categories.adapter = adapter
             navbar.categoryButton.setOnClickListener {
-                val categorySelectDialog = CategorySelectDialog(onClick = onClick)
-                categorySelectDialog.show(this@MainFragment.parentFragmentManager, null)
+                CategorySelectDialog.show(parentFragmentManager, onClick = onClick)
             }
         }
 

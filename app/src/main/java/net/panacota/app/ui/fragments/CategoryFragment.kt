@@ -51,16 +51,15 @@ class CategoryFragment : Fragment() {
                 recipes.adapter = adapter
             }
             navbar.categoryButton.setOnClickListener {
-                val categorySelectDialog = CategorySelectDialog(mealType) {
+                CategorySelectDialog.show(parentFragmentManager, mealType) {
                     if (mealType == it) {
                         allItems.back.callOnClick()
-                        return@CategorySelectDialog
+                    } else {
+                        mealType = it
+                        allItems.category.text = resources.getString(it.getStringResource())
+                        categoryViewModel.start(it)
                     }
-                    mealType = it
-                    allItems.category.text = resources.getString(it.getStringResource())
-                    categoryViewModel.start(it)
                 }
-                categorySelectDialog.show(this@CategoryFragment.parentFragmentManager, null)
             }
         }
 

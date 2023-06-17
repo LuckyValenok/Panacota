@@ -2,6 +2,7 @@ package net.panacota.app.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -9,10 +10,10 @@ import com.bumptech.glide.Glide
 import net.panacota.app.R
 import net.panacota.app.databinding.CategoryItemBinding
 import net.panacota.app.domain.data.Recipe
+import net.panacota.app.ui.dialogs.RecipeDialog
 
-class RecipesAdapter(list: List<Recipe>? = null) : ListAdapter<Recipe, RecipesAdapter.RecipeViewHolder>(
-    RecipeDiffUtil()
-) {
+class RecipesAdapter(list: List<Recipe>? = null) :
+    ListAdapter<Recipe, RecipesAdapter.RecipeViewHolder>(RecipeDiffUtil()) {
     init {
         submitList(list)
     }
@@ -39,6 +40,9 @@ class RecipesAdapter(list: List<Recipe>? = null) : ListAdapter<Recipe, RecipesAd
                 .centerCrop()
                 .placeholder(R.drawable.category_item_img)
                 .into(backgroundImage)
+            card.setOnClickListener {
+                RecipeDialog.show((root.context as AppCompatActivity).supportFragmentManager, recipe)
+            }
         }
     }
 
