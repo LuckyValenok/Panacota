@@ -25,8 +25,7 @@ class CategorySelectAdapter(private val selectCategory: MealType?, private val o
             RecyclerView.ViewHolder(binding.root) {
         fun bind(mealType: MealType) = with(binding) {
             root.text = root.resources.getString(mealType.getStringResource())
-            root.isEnabled = mealType != selectCategory
-            if (!root.isEnabled) {
+            if (mealType == selectCategory) {
                 root.paintFlags = root.paintFlags or Paint.UNDERLINE_TEXT_FLAG
             }
             root.setOnClickListener {

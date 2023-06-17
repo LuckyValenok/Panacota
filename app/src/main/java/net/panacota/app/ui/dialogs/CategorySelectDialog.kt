@@ -40,6 +40,6 @@ class CategorySelectDialog(private val selectCategory: MealType? = null, private
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(STYLE_NORMAL, R.style.Theme_FullScreenDialog)
+        setStyle(STYLE_NORMAL, R.style.Theme_Panacota_FullScreenDialog)
     }
 }

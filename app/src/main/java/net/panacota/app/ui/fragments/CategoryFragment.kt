@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import net.panacota.app.MainApplication
 import net.panacota.app.databinding.CategoryFragmentBinding
+import net.panacota.app.domain.data.MealType
 import net.panacota.app.ui.adapters.RecipesAdapter
 import net.panacota.app.ui.dialogs.CategorySelectDialog
 import net.panacota.app.ui.viewmodels.CategoryViewModel
@@ -19,8 +20,8 @@ import javax.inject.Inject
 class CategoryFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    private val args: CategoryFragmentArgs by navArgs()
     private lateinit var categoryViewModel: CategoryViewModel
+    private var mealType: MealType = MealType.MAIN_COURSE
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,9 +34,10 @@ class CategoryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding: CategoryFragmentBinding = CategoryFragmentBinding.inflate(inflater, container, false)
+        val args: CategoryFragmentArgs by navArgs()
+        mealType = args.mealType
 
         val adapter = RecipesAdapter()
-        val mealType = args.mealType
         binding.apply {
             allItems.apply {
                 back.setOnClickListener {
@@ -50,6 +52,11 @@ class CategoryFragment : Fragment() {
             }
             navbar.categoryButton.setOnClickListener {
                 val categorySelectDialog = CategorySelectDialog(mealType) {
+                    if (mealType == it) {
+                        allItems.back.callOnClick()
+                        return@CategorySelectDialog
+                    }
+                    mealType = it
                     allItems.category.text = resources.getString(it.getStringResource())
                     categoryViewModel.start(it)
                 }
