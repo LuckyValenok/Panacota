@@ -15,8 +15,8 @@
     </style>
 
     <style name="Theme.Panacota.FullScreenDialog" parent="Theme.Material3.DayNight.Dialog">
-        <item name="colorPrimary">@color/white</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimary">@color/black</item>
+        <item name="colorOnPrimary">@color/black</item>
         <item name="android:windowIsFloating">false</item>
         <item name="android:windowBackground">@android:color/white</item>
     </style>
