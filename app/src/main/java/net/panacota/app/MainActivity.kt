@@ -3,6 +3,7 @@ package net.panacota.app
 import android.os.Bundle
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
@@ -20,6 +21,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         installSplashScreen()
 
         (application as MainApplication).component.injectMainActivity(this)
