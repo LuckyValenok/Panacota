@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewGroup.LayoutParams
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.GridLayoutManager
 import net.panacota.app.MainApplication
 import net.panacota.app.databinding.CategoryFragmentBinding
 import net.panacota.app.domain.data.MealType
@@ -37,7 +39,9 @@ class CategoryFragment : Fragment() {
         val args: CategoryFragmentArgs by navArgs()
         mealType = args.mealType
 
-        val adapter = RecipesAdapter()
+        val adapter = RecipesAdapter {
+            it.root.layoutParams.width = LayoutParams.MATCH_PARENT
+        }
         binding.apply {
             allItems.apply {
                 back.setOnClickListener {
