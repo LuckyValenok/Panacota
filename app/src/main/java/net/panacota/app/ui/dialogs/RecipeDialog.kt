@@ -20,13 +20,24 @@ class RecipeDialog(private val recipe: Recipe) : FullScreenDialog() {
 
         binding.apply {
             Glide
-                .with(root)
-                .load(recipe.image)
-                .centerCrop()
-                .placeholder(R.drawable.receipt_card_image)
-                .into(recipeImg)
+                    .with(root)
+                    .load(recipe.image)
+                    .centerCrop()
+                    .placeholder(R.drawable.receipt_card_image)
+                    .into(recipeImg)
             buttonExit.setOnClickListener {
                 dismiss()
+            }
+            scrollToTop.setOnClickListener {
+                scrollView.smoothScrollTo(0, 0)
+                appBar.setExpanded(true)
+            }
+            scrollView.setOnScrollChangeListener { _, _, _, _, _ ->
+                if (scrollView.canScrollVertically(-1)) {
+                    scrollToTop.visibility = View.VISIBLE
+                } else {
+                    scrollToTop.visibility = View.GONE
+                }
             }
 
             recipeTitle.text = recipe.title
