@@ -6,23 +6,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.search.SearchBar
 import net.panacota.app.MainActivity
 import net.panacota.app.MainApplication
 import net.panacota.app.databinding.MainFragmentBinding
 import net.panacota.app.domain.data.MealType
 import net.panacota.app.ui.adapters.CategoriesAdapter
 import net.panacota.app.ui.dialogs.CategorySelectDialog
+import net.panacota.app.ui.dialogs.FiltersDialog
 import net.panacota.app.ui.viewmodels.MainViewModel
 import javax.inject.Inject
 
 class MainFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    lateinit var mainViewModel: MainViewModel
-    lateinit var adapter: CategoriesAdapter
+    private lateinit var mainViewModel: MainViewModel
+    private lateinit var adapter: CategoriesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,14 +35,19 @@ class MainFragment : Fragment() {
     ): View {
         val binding: MainFragmentBinding = MainFragmentBinding.inflate(inflater, container, false)
 
-        val onClick = { mealType: MealType ->
-            val action = MainFragmentDirections.actionMainFragmentToCategoryFragment(mealType)
+        val onClick = { mealType: MealType? ->
+            val action = MainFragmentDirections.actionMainFragmentToCategoryFragment().setMealType(mealType?.name)
             findNavController().navigate(action)
         }
 
-        (requireActivity() as MainActivity).binding.apply {
-            categoryButton.setOnClickListener {
+        (requireActivity() as MainActivity).apply {
+            this.binding.categoryButton.setOnClickListener {
                 CategorySelectDialog.show(parentFragmentManager, onClick = onClick)
+            }
+            this.binding.filterButton.setOnClickListener {
+                FiltersDialog.show(parentFragmentManager, sharedPreferencesRepository) {
+                    onClick(null)
+                }
             }
         }
 

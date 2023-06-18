@@ -15,6 +15,7 @@ import net.panacota.app.databinding.CategoryAllItemsBinding
 import net.panacota.app.domain.data.MealType
 import net.panacota.app.ui.adapters.RecipesAdapter
 import net.panacota.app.ui.dialogs.CategorySelectDialog
+import net.panacota.app.ui.dialogs.FiltersDialog
 import net.panacota.app.ui.listeners.EndlessRecyclerOnScrollListener
 import net.panacota.app.ui.viewmodels.CategoryViewModel
 import javax.inject.Inject
@@ -24,7 +25,6 @@ class CategoryFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var categoryViewModel: CategoryViewModel
-    private var mealType: MealType = MealType.MAIN_COURSE
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,10 +39,11 @@ class CategoryFragment : Fragment() {
         val binding: CategoryAllItemsBinding =
             CategoryAllItemsBinding.inflate(inflater, container, false)
         val args: CategoryFragmentArgs by navArgs()
-        mealType = args.mealType
+        var mealType: MealType? =
+            if (args.mealType != null) MealType.valueOf(args.mealType!!) else null
 
-        (requireActivity() as MainActivity).binding.apply {
-            categoryButton.setOnClickListener {
+        (requireActivity() as MainActivity).apply {
+            this.binding.categoryButton.setOnClickListener {
                 CategorySelectDialog.show(parentFragmentManager, mealType) {
                     if (mealType == it) {
                         binding.back.callOnClick()
@@ -51,6 +52,11 @@ class CategoryFragment : Fragment() {
                         binding.category.text = resources.getString(it.getStringResource())
                         categoryViewModel.load(it)
                     }
+                }
+            }
+            this.binding.filterButton.setOnClickListener {
+                FiltersDialog.show(parentFragmentManager, sharedPreferencesRepository) {
+                    categoryViewModel.load(mealType)
                 }
             }
         }
@@ -66,7 +72,8 @@ class CategoryFragment : Fragment() {
                     navController.navigate(action)
                 }
             }
-            category.text = resources.getString(mealType.getStringResource())
+            category.text =
+                if (mealType != null) resources.getString(mealType!!.getStringResource()) else ""
             recipes.adapter = adapter
             recipes.addOnScrollListener(EndlessRecyclerOnScrollListener {
                 categoryViewModel.loadMore()

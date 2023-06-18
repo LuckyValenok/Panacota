@@ -18,8 +18,9 @@
     android:name="net.panacota.app.ui.fragments.CategoryFragment">
     <argument
       android:name="mealType"
-      app:argType="net.panacota.app.domain.data.MealType"
-      />
+      app:argType="string"
+      app:nullable="true"
+      android:defaultValue="@null"/>
     <action android:id="@+id/action_categoryFragment_to_mainFragment" app:destination="@id/mainFragment"/>
   </fragment>
 </navigation>

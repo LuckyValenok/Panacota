@@ -8,6 +8,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import net.panacota.app.databinding.MainActivityBinding
+import net.panacota.app.domain.repository.SharedPreferencesRepository
 import net.panacota.app.ui.adapters.RecipesAdapter
 import net.panacota.app.ui.listeners.EndlessRecyclerOnScrollListener
 import net.panacota.app.ui.viewmodels.SearchViewModel
@@ -16,6 +17,8 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+    @Inject
+    lateinit var sharedPreferencesRepository: SharedPreferencesRepository
     lateinit var binding: MainActivityBinding
     private lateinit var searchViewModel: SearchViewModel
 

@@ -2,7 +2,7 @@ package net.panacota.app.domain.data
 
 import net.panacota.app.R
 
-enum class MealType(private val stringResource: Int) {
+enum class MealType(private val stringResource: Int) : IResourced {
     MAIN_COURSE(R.string.main_course),
     SIDE_DISH(R.string.side_dish),
     DESSERT(R.string.dessert),
@@ -20,7 +20,7 @@ enum class MealType(private val stringResource: Int) {
 
     override fun toString(): String = name.lowercase().replace('_', ' ')
 
-    fun getStringResource(): Int = stringResource
+    override fun getStringResource(): Int = stringResource
 
     companion object {
         val ARRAY = values()
