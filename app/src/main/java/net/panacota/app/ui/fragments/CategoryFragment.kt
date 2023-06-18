@@ -9,12 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.GridLayoutManager
 import net.panacota.app.MainApplication
 import net.panacota.app.databinding.CategoryFragmentBinding
 import net.panacota.app.domain.data.MealType
 import net.panacota.app.ui.adapters.RecipesAdapter
 import net.panacota.app.ui.dialogs.CategorySelectDialog
+import net.panacota.app.ui.listeners.EndlessRecyclerOnScrollListener
 import net.panacota.app.ui.viewmodels.CategoryViewModel
 import javax.inject.Inject
 
@@ -53,6 +53,9 @@ class CategoryFragment : Fragment() {
                 }
                 category.text = resources.getString(mealType.getStringResource())
                 recipes.adapter = adapter
+                recipes.addOnScrollListener(EndlessRecyclerOnScrollListener {
+                    categoryViewModel.loadMore()
+                })
             }
             navbar.categoryButton.setOnClickListener {
                 CategorySelectDialog.show(parentFragmentManager, mealType) {
@@ -69,7 +72,7 @@ class CategoryFragment : Fragment() {
 
         categoryViewModel = viewModelFactory.create(CategoryViewModel::class.java)
 
-        categoryViewModel.recipes.observe(viewLifecycleOwner) {
+        categoryViewModel.recipesLiveData.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
 

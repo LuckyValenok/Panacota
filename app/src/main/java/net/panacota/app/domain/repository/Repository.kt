@@ -8,5 +8,9 @@ import retrofit2.Response
 interface Repository {
     suspend fun getRecipes(): Response<ListRecipe>
 
-    suspend fun getRecipesByType(mealType: MealType, @IntRange(1, 100) limit: Int): Response<ListRecipe>
+    suspend fun getRecipesByType(
+            mealType: MealType,
+            @IntRange(1, 100) limit: Int,
+            @IntRange(0, 900) offset: Int
+    ): Response<ListRecipe>
 }

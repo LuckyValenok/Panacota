@@ -9,16 +9,40 @@ import net.panacota.app.domain.data.Recipe
 import net.panacota.app.domain.usecases.getRecipesByType.GetRecipesByTypeUseCase
 import javax.inject.Inject
 
-class CategoryViewModel @Inject constructor(private val getRecipesByTypeUseCase: GetRecipesByTypeUseCase) : ViewModel() {
-    val recipes = MutableLiveData<List<Recipe>>()
+class CategoryViewModel @Inject constructor(
+        private val getRecipesByTypeUseCase: GetRecipesByTypeUseCase
+) : ViewModel() {
+    val recipesLiveData = MutableLiveData<List<Recipe>>(mutableListOf())
     private var launchedJob: Job? = null
+    private var launchedLoadMoreJob: Job? = null
+    private var lastLoadMoreCounts: Int = 0
+    private var size: Int = 0
+    private lateinit var mealType: MealType
 
     fun start(mealType: MealType) {
+        this.mealType = mealType
         launchedJob?.cancel("Change category")
         launchedJob = viewModelScope.launch(Dispatchers.IO) {
-            val recipes = getRecipesByTypeUseCase(mealType)
+            val recipes = getRecipesByTypeUseCase(mealType, 30)
+            lastLoadMoreCounts = recipes.size
+            size += lastLoadMoreCounts
             withContext(Dispatchers.Main) {
-                this@CategoryViewModel.recipes.postValue(recipes)
+                recipesLiveData.postValue(recipesLiveData.value?.plus(recipes))
+            }
+        }
+    }
+
+    fun loadMore() {
+        if (launchedLoadMoreJob == null && lastLoadMoreCounts != 0) {
+            launchedLoadMoreJob = viewModelScope.launch(Dispatchers.IO) {
+                val recipes = getRecipesByTypeUseCase(mealType, 30, size)
+                lastLoadMoreCounts = recipes.size
+                size += lastLoadMoreCounts
+                println(size)
+                withContext(Dispatchers.Main) {
+                    recipesLiveData.postValue(recipesLiveData.value?.plus(recipes))
+                    launchedLoadMoreJob = null
+                }
             }
         }
     }

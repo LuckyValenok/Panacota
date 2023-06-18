@@ -33,7 +33,7 @@ class RecipesAdapter(list: List<Recipe>? = null, private val onBind: ((CategoryI
     inner class RecipeViewHolder(private val binding: CategoryItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(recipe: Recipe) = with(binding) {
-            onBind?.run { this }
+            onBind?.invoke(this)
             header.text = recipe.title
             Glide
                     .with(binding.root)
@@ -49,10 +49,10 @@ class RecipesAdapter(list: List<Recipe>? = null, private val onBind: ((CategoryI
 
     class RecipeDiffUtil : DiffUtil.ItemCallback<Recipe>() {
         override fun areItemsTheSame(oldItem: Recipe, newItem: Recipe): Boolean =
-            oldItem.id == newItem.id
+                oldItem.id == newItem.id
 
         override fun areContentsTheSame(oldItem: Recipe, newItem: Recipe): Boolean =
-            oldItem == newItem
+                oldItem == newItem
 
     }
 }

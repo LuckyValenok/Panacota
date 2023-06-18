@@ -12,8 +12,13 @@ interface RecipesDao {
     @Query("SELECT * FROM recipe")
     suspend fun getAll(): List<Recipe>
 
-    @Query("SELECT * FROM recipe WHERE dishTypes LIKE '%' || :mealType || '%' LIMIT CASE WHEN :limit <= 0 THEN -1 ELSE :limit END")
-    suspend fun getAllByDishType(mealType: MealType, limit: Int = -1): List<Recipe>
+    @Query("SELECT * FROM recipe WHERE dishTypes LIKE '%' || :mealType || '%' " +
+            "LIMIT CASE WHEN :limit <= 0 THEN -1 ELSE :limit END OFFSET :offset")
+    suspend fun getAllByDishType(
+            mealType: MealType,
+            limit: Int = -1,
+            offset: Int = 0
+    ): List<Recipe>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertRecipes(recipes: List<Recipe>)
