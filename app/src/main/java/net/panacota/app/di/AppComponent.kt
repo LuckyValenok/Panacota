@@ -3,10 +3,13 @@ package net.panacota.app.di
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.room.Room
 import dagger.*
 import dagger.multibindings.IntoMap
 import net.panacota.app.BuildConfig
 import net.panacota.app.domain.api.RecipesApi
+import net.panacota.app.domain.database.RecipesDao
+import net.panacota.app.domain.database.RecipesDatabase
 import net.panacota.app.domain.repository.Repository
 import net.panacota.app.domain.repository.RepositoryImpl
 import net.panacota.app.domain.usecases.getRecipes.GetRecipesUseCase
@@ -96,6 +99,13 @@ abstract class NetworkModule {
         fun provideApiService(retrofit: Retrofit): RecipesApi {
             return retrofit.create(RecipesApi::class.java)
         }
+
+        @Provides
+        fun provideRecipesDatabase(context: Context): RecipesDatabase =
+            Room.databaseBuilder(context.applicationContext, RecipesDatabase::class.java, RecipesDatabase.NAME).build()
+
+        @Provides
+        fun provideDao(recipesDatabase: RecipesDatabase): RecipesDao = recipesDatabase.recipesDao()
     }
 
     @Binds

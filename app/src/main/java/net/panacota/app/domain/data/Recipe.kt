@@ -5,10 +5,14 @@ import android.text.Html
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.AbsoluteSizeSpan
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import net.panacota.app.R
 
+@Entity
 data class Recipe(
+    @PrimaryKey
     @SerializedName("id")
     val id: Int,
     @SerializedName("extendedIngredients")
@@ -28,7 +32,9 @@ data class Recipe(
     @SerializedName("title")
     val title: String,
     @SerializedName("analyzedInstructions")
-    val analyzedInstructions: List<AnalyzedInstruction>?
+    val analyzedInstructions: List<AnalyzedInstruction>?,
+    @SerializedName("dishTypes")
+    val dishTypes: List<String>
 ) {
     fun toSpannableStringBuilder(resources: Resources): SpannableStringBuilder {
         val builder = SpannableStringBuilder()
