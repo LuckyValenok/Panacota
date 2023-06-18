@@ -20,7 +20,7 @@ class MainViewModel @Inject constructor(getRecipesByFiltersUseCase: GetRecipesBy
             val list = mutableListOf<Category>()
             for (value in MealType.values()) {
                 val recipes = getRecipesByFiltersUseCase(mapOf(
-                    "mealType" to value.toString()
+                    "type" to value.toString()
                 ))
                 list += Category(value, recipes)
                 withContext(Dispatchers.Main) {
