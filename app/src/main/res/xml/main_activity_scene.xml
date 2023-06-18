@@ -1,21 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <ConstraintSet android:id="@+id/start">
-        <Constraint android:id="@+id/widget" />
-    </ConstraintSet>
-
-    <ConstraintSet android:id="@+id/end">
-        <Constraint android:id="@id/widget" />
-    </ConstraintSet>
-
+<MotionScene
+  xmlns:app="http://schemas.android.com/apk/res-auto">
     <Transition
-        app:constraintSetEnd="@layout/end_layout"
-        app:constraintSetStart="@layout/start_layout">
+      app:constraintSetEnd="@layout/end_layout"
+      app:constraintSetStart="@layout/start_layout">
         <OnSwipe
-            app:dragDirection="dragUp"
-            app:touchAnchorId="@+id/fragment_container_view_tag"/>
-
+          app:dragDirection="dragUp"
+          app:touchAnchorId="@+id/fragment_container_view_tag"/>
     </Transition>
 </MotionScene>

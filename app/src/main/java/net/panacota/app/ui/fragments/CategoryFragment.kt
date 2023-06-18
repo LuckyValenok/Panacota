@@ -20,7 +20,6 @@ import net.panacota.app.ui.listeners.EndlessRecyclerOnScrollListener
 import net.panacota.app.ui.viewmodels.CategoryViewModel
 import javax.inject.Inject
 
-
 class CategoryFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory

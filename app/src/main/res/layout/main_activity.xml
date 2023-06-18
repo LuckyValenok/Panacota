@@ -9,28 +9,119 @@
     tools:context=".MainActivity">
 
     <androidx.constraintlayout.motion.widget.MotionLayout
-        android:id="@+id/motion_layout"
-        app:layoutDescription="@xml/main_activity_scene"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+      android:id="@+id/motion_layout"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      app:layoutDescription="@xml/main_activity_scene">
+        <ImageView
+          android:id="@+id/searchbar_background"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:src="@drawable/panacota_bg"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          android:scaleType="centerCrop"
+          android:adjustViewBounds="true"
+          android:foreground="#45000000"/>
 
+        <TextView
+          android:id="@+id/general_text"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/Panacota"
+          android:textSize="46sp"
+          android:textColor="@color/white"
+          android:textFontWeight="300"
+          android:fontFamily="@font/didact_gothic"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="@+id/searchbar_background"
+          app:layout_constraintBottom_toBottomOf="@+id/searchbar_background"/>
 
+        <com.google.android.material.appbar.AppBarLayout
+          android:id="@+id/bar_layout"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="15dp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/general_text"
+          android:background="#00FFFFFF">
+
+            <com.google.android.material.search.SearchBar
+              android:id="@+id/search_bar"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:hint="@string/search_placeholder"
+              android:backgroundTint="#BFD8D8D8"
+              android:background="#BFD8D8D8"/>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <Button
+          android:id="@+id/category_button"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:backgroundTint="@color/white"
+          android:drawableEnd="@drawable/category_image"
+          android:text="@string/category"
+          android:fontFamily="@font/didact_gothic"
+          android:textColor="@color/black"
+          android:textSize="19sp"
+          android:padding="10dp"
+          android:gravity="start"
+          android:layout_marginStart="6dp"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/searchbar_background"/>
+
+        <Button
+          android:id="@+id/filter_button"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:backgroundTint="@color/white"
+          android:drawableEnd="@drawable/filter_image"
+          android:text="@string/filters"
+          android:textColor="@color/black"
+          android:fontFamily="@font/didact_gothic"
+          android:padding="10dp"
+          android:layout_marginEnd="9dp"
+          android:textSize="19sp"
+          android:gravity="start"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/searchbar_background"/>
+
+        <com.google.android.material.search.SearchView
+          android:id="@+id/search_view"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:hint="@string/search_placeholder"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent">
+            <androidx.recyclerview.widget.RecyclerView
+              android:id="@+id/recipes"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toBottomOf="@+id/back"
+              app:spanCount="2"
+              tools:listitem="@layout/category_item"/>
+        </com.google.android.material.search.SearchView>
+
+        <androidx.fragment.app.FragmentContainerView
+          android:id="@+id/fragment_container_view_tag"
+          android:name="androidx.navigation.fragment.NavHostFragment"
+          android:layout_width="0dp"
+          android:layout_height="0dp"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/category_button"
+          app:defaultNavHost="true"
+          app:navGraph="@navigation/nav_graph"
+          tools:layout="@layout/main_fragment"/>
     </androidx.constraintlayout.motion.widget.MotionLayout>
-
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragment_container_view_tag"
-        android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/motion_layout"
-        app:defaultNavHost="true"
-        app:navGraph="@navigation/nav_graph"
-        tools:layout="@layout/main_fragment"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
