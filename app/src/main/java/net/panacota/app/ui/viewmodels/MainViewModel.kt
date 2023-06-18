@@ -7,12 +7,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import net.panacota.app.domain.data.MealType
-import net.panacota.app.domain.database.RecipesDao
 import net.panacota.app.domain.usecases.getRecipesByType.GetRecipesByTypeUseCase
 import net.panacota.app.ui.adapters.Category
 import javax.inject.Inject
 
-class MainViewModel @Inject constructor(getRecipesByTypeUseCase: GetRecipesByTypeUseCase) : ViewModel() {
+class MainViewModel @Inject constructor(getRecipesByTypeUseCase: GetRecipesByTypeUseCase) :
+    ViewModel() {
     val categories = MutableLiveData<List<Category>>()
 
     init {

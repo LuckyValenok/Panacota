@@ -6,7 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.search.SearchBar
+import net.panacota.app.MainActivity
 import net.panacota.app.MainApplication
 import net.panacota.app.databinding.MainFragmentBinding
 import net.panacota.app.domain.data.MealType
@@ -18,6 +21,8 @@ import javax.inject.Inject
 class MainFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+    lateinit var mainViewModel: MainViewModel
+    lateinit var adapter: CategoriesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,22 +40,29 @@ class MainFragment : Fragment() {
             val action = MainFragmentDirections.actionMainFragmentToCategoryFragment(mealType)
             findNavController().navigate(action)
         }
-        val adapter = CategoriesAdapter {
-            onClick(it.type)
-        }
-        binding.apply {
-            categories.adapter = adapter
+
+        (requireActivity() as MainActivity).binding.apply {
             navbar.categoryButton.setOnClickListener {
                 CategorySelectDialog.show(parentFragmentManager, onClick = onClick)
             }
         }
 
-        val mainViewModel = viewModelFactory.create(MainViewModel::class.java)
+        adapter = CategoriesAdapter {
+            onClick(it.type)
+        }
+        binding.categories.adapter = adapter
+
+        mainViewModel = viewModelFactory.create(MainViewModel::class.java)
+
+        return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
 
         mainViewModel.categories.observe(viewLifecycleOwner) {
             adapter.submitList(it)
+            adapter.notifyItemChanged(it.size - 1)
         }
-
-        return binding.root
     }
 }

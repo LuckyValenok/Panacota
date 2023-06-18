@@ -9,8 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import net.panacota.app.MainActivity
 import net.panacota.app.MainApplication
-import net.panacota.app.databinding.CategoryFragmentBinding
+import net.panacota.app.databinding.CategoryAllItemsBinding
 import net.panacota.app.domain.data.MealType
 import net.panacota.app.ui.adapters.RecipesAdapter
 import net.panacota.app.ui.dialogs.CategorySelectDialog
@@ -35,39 +36,41 @@ class CategoryFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding: CategoryFragmentBinding = CategoryFragmentBinding.inflate(inflater, container, false)
+        val binding: CategoryAllItemsBinding =
+            CategoryAllItemsBinding.inflate(inflater, container, false)
         val args: CategoryFragmentArgs by navArgs()
         mealType = args.mealType
+
+        (requireActivity() as MainActivity).binding.apply {
+            navbar.categoryButton.setOnClickListener {
+                CategorySelectDialog.show(parentFragmentManager, mealType) {
+                    if (mealType == it) {
+                        binding.back.callOnClick()
+                    } else {
+                        mealType = it
+                        binding.category.text = resources.getString(it.getStringResource())
+                        categoryViewModel.start(it)
+                    }
+                }
+            }
+        }
 
         val adapter = RecipesAdapter {
             it.root.layoutParams.width = LayoutParams.MATCH_PARENT
         }
         binding.apply {
-            allItems.apply {
-                back.setOnClickListener {
-                    val navController = findNavController()
-                    if (!navController.popBackStack()) {
-                        val action = CategoryFragmentDirections.actionCategoryFragmentToMainFragment()
-                        navController.navigate(action)
-                    }
-                }
-                category.text = resources.getString(mealType.getStringResource())
-                recipes.adapter = adapter
-                recipes.addOnScrollListener(EndlessRecyclerOnScrollListener {
-                    categoryViewModel.loadMore()
-                })
-            }
-            navbar.categoryButton.setOnClickListener {
-                CategorySelectDialog.show(parentFragmentManager, mealType) {
-                    if (mealType == it) {
-                        allItems.back.callOnClick()
-                    } else {
-                        mealType = it
-                        allItems.category.text = resources.getString(it.getStringResource())
-                        categoryViewModel.start(it)
-                    }
+            back.setOnClickListener {
+                val navController = findNavController()
+                if (!navController.popBackStack()) {
+                    val action = CategoryFragmentDirections.actionCategoryFragmentToMainFragment()
+                    navController.navigate(action)
                 }
             }
+            category.text = resources.getString(mealType.getStringResource())
+            recipes.adapter = adapter
+            recipes.addOnScrollListener(EndlessRecyclerOnScrollListener {
+                categoryViewModel.loadMore()
+            })
         }
 
         categoryViewModel = viewModelFactory.create(CategoryViewModel::class.java)

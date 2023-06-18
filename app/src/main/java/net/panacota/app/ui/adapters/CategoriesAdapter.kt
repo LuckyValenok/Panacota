@@ -36,7 +36,7 @@ class CategoriesAdapter(private val onClick: (Category) -> Unit) :
 
     class CategoryDiffUtil : DiffUtil.ItemCallback<Category>() {
         override fun areItemsTheSame(oldItem: Category, newItem: Category): Boolean =
-            oldItem.type == newItem.type
+            oldItem == newItem
 
         override fun areContentsTheSame(oldItem: Category, newItem: Category): Boolean =
             oldItem == newItem
