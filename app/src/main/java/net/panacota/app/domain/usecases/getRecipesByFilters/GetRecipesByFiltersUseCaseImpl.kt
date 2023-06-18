@@ -26,10 +26,10 @@ class GetRecipesByFiltersUseCaseImpl @Inject constructor(
                 return recipes.results
             }
         } catch (e: UnknownHostException) {
-            if (filters.containsKey("query")) {
-                return recipesDao.search(filters["query"]!!, limit, offset)
+            return if (filters.containsKey("query")) {
+                recipesDao.search(filters["query"]!!, limit, offset)
             } else {
-                return recipesDao.getAllByDishType(filters["mealType"]!!, limit, offset)
+                recipesDao.getAllByDishType(filters["type"]!!, limit, offset)
             }
         }
         return emptyList()
