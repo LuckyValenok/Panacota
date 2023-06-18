@@ -7,7 +7,7 @@ import net.panacota.app.domain.repository.SharedPreferencesRepository
 import net.panacota.app.domain.usecases.getRecipesByFilters.GetRecipesByFiltersUseCase
 import javax.inject.Inject
 
-class CategoryViewModel @Inject constructor(
+class RecipesViewModel @Inject constructor(
     private val getRecipesByFiltersUseCase: GetRecipesByFiltersUseCase,
     private val sharedPreferencesRepository: SharedPreferencesRepository
 ) : EndlessOnScrollViewModel<Recipe, MealType>() {

@@ -43,7 +43,7 @@ class FiltersAdapter(
             }
             val list: MutableList<String> =
                 filter.getValuesResources().map { root.resources.getString(it) }.toMutableList()
-            list.add(0, "")
+            list.add(0, root.resources.getString(R.string.not_selected))
             val arrayAdapter = ArrayAdapter(
                 context,
                 R.layout.filter_item,

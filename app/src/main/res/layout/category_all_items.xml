@@ -18,6 +18,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/back" />
 
+    <TextView
+      android:id="@+id/not_found_text"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:fontFamily="@font/didact_gothic"
+      android:textColor="@color/black"
+      android:textSize="25sp"
+      android:text="@string/not_found"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      android:visibility="invisible"/>
+
     <ImageButton
         android:id="@+id/back"
         android:layout_width="55dp"

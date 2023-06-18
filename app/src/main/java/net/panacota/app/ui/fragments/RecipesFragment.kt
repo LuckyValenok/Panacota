@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewGroup.LayoutParams
+import android.view.ViewGroup.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -17,18 +17,18 @@ import net.panacota.app.ui.adapters.RecipesAdapter
 import net.panacota.app.ui.dialogs.CategorySelectDialog
 import net.panacota.app.ui.dialogs.FiltersDialog
 import net.panacota.app.ui.listeners.EndlessRecyclerOnScrollListener
-import net.panacota.app.ui.viewmodels.CategoryViewModel
+import net.panacota.app.ui.viewmodels.RecipesViewModel
 import javax.inject.Inject
 
-class CategoryFragment : Fragment() {
+class RecipesFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    private lateinit var categoryViewModel: CategoryViewModel
+    private lateinit var recipesViewModel: RecipesViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        (activity?.application as MainApplication).component.injectCategoryFragment(this)
+        (activity?.application as MainApplication).component.injectRecipesFragment(this)
     }
 
     override fun onCreateView(
@@ -37,7 +37,7 @@ class CategoryFragment : Fragment() {
     ): View {
         val binding: CategoryAllItemsBinding =
             CategoryAllItemsBinding.inflate(inflater, container, false)
-        val args: CategoryFragmentArgs by navArgs()
+        val args: RecipesFragmentArgs by navArgs()
         var mealType: MealType? =
             if (args.mealType != null) MealType.valueOf(args.mealType!!) else null
 
@@ -49,13 +49,13 @@ class CategoryFragment : Fragment() {
                     } else {
                         mealType = it
                         binding.category.text = resources.getString(it.getStringResource())
-                        categoryViewModel.load(it)
+                        recipesViewModel.load(it)
                     }
                 }
             }
             this.binding.filterButton.setOnClickListener {
                 FiltersDialog.show(parentFragmentManager, sharedPreferencesRepository) {
-                    categoryViewModel.load(mealType)
+                    recipesViewModel.load(mealType)
                 }
             }
         }
@@ -67,7 +67,7 @@ class CategoryFragment : Fragment() {
             back.setOnClickListener {
                 val navController = findNavController()
                 if (!navController.popBackStack()) {
-                    val action = CategoryFragmentDirections.actionCategoryFragmentToMainFragment()
+                    val action = RecipesFragmentDirections.actionCategoryFragmentToMainFragment()
                     navController.navigate(action)
                 }
             }
@@ -75,17 +75,18 @@ class CategoryFragment : Fragment() {
                 if (mealType != null) resources.getString(mealType!!.getStringResource()) else ""
             recipes.adapter = adapter
             recipes.addOnScrollListener(EndlessRecyclerOnScrollListener {
-                categoryViewModel.loadMore()
+                recipesViewModel.loadMore()
             })
         }
 
-        categoryViewModel = viewModelFactory.create(CategoryViewModel::class.java)
+        recipesViewModel = viewModelFactory.create(RecipesViewModel::class.java)
 
-        categoryViewModel.observe(viewLifecycleOwner) {
+        recipesViewModel.observe(viewLifecycleOwner) {
             adapter.submitList(it)
+            binding.notFoundText.visibility = if (it.isEmpty()) VISIBLE else INVISIBLE
         }
 
-        categoryViewModel.load(mealType)
+        recipesViewModel.load(mealType)
 
         return binding.root
     }

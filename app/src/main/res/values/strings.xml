@@ -85,4 +85,6 @@
     <string name="caterogy_item_placeholder">Американский тыквенный пирог</string>
     <string name="label">label</string>
     <string name="btn_apply">Apply</string>
+    <string name="not_found">Not Found</string>
+    <string name="not_selected">Not Selected</string>
 </resources>

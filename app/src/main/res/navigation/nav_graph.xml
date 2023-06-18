@@ -15,7 +15,7 @@
   <fragment
     android:id="@+id/categoryFragment"
     android:label="CategoryFragment"
-    android:name="net.panacota.app.ui.fragments.CategoryFragment">
+    android:name="net.panacota.app.ui.fragments.RecipesFragment">
     <argument
       android:name="mealType"
       app:argType="string"

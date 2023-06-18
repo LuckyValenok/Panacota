@@ -15,9 +15,9 @@ import net.panacota.app.domain.repository.Repository
 import net.panacota.app.domain.repository.RepositoryImpl
 import net.panacota.app.domain.usecases.getRecipesByFilters.GetRecipesByFiltersUseCase
 import net.panacota.app.domain.usecases.getRecipesByFilters.GetRecipesByFiltersUseCaseImpl
-import net.panacota.app.ui.fragments.CategoryFragment
+import net.panacota.app.ui.fragments.RecipesFragment
 import net.panacota.app.ui.fragments.MainFragment
-import net.panacota.app.ui.viewmodels.CategoryViewModel
+import net.panacota.app.ui.viewmodels.RecipesViewModel
 import net.panacota.app.ui.viewmodels.MainViewModel
 import net.panacota.app.ui.viewmodels.SearchViewModel
 import okhttp3.OkHttpClient
@@ -31,7 +31,7 @@ import javax.inject.Singleton
 interface AppComponent {
     fun injectMainFragment(mainFragment: MainFragment)
 
-    fun injectCategoryFragment(categoryFragment: CategoryFragment)
+    fun injectRecipesFragment(recipesFragment: RecipesFragment)
 
     fun injectMainActivity(mainActivity: MainActivity)
 
@@ -53,8 +53,8 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(CategoryViewModel::class)
-    abstract fun categoryViewModel(viewModel: CategoryViewModel): ViewModel
+    @ViewModelKey(RecipesViewModel::class)
+    abstract fun recipesViewModel(viewModel: RecipesViewModel): ViewModel
 
     @Binds
     @IntoMap
