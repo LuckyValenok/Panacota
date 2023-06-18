@@ -21,10 +21,11 @@
         android:layout_margin="15dp"
         android:hint="@string/label">
 
-        <AutoCompleteTextView
+        <com.google.android.material.textfield.MaterialAutoCompleteTextView
             android:id="@+id/auto_complete_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:popupBackground="#F5F5F5"
             android:backgroundTint="#F5F5F5"
             android:textColorHint="#000000"
             android:inputType="none"/>
