@@ -42,7 +42,7 @@ class MainFragment : Fragment() {
         }
 
         (requireActivity() as MainActivity).binding.apply {
-            navbar.categoryButton.setOnClickListener {
+            categoryButton.setOnClickListener {
                 CategorySelectDialog.show(parentFragmentManager, onClick = onClick)
             }
         }

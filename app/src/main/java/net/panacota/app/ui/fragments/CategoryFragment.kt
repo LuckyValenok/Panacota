@@ -42,7 +42,7 @@ class CategoryFragment : Fragment() {
         mealType = args.mealType
 
         (requireActivity() as MainActivity).binding.apply {
-            navbar.categoryButton.setOnClickListener {
+            categoryButton.setOnClickListener {
                 CategorySelectDialog.show(parentFragmentManager, mealType) {
                     if (mealType == it) {
                         binding.back.callOnClick()

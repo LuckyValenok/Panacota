@@ -34,7 +34,7 @@
             android:layout_marginHorizontal="10dp"
             android:layout_marginBottom="10dp"
             android:textColor="@color/white"
-            android:text="Американский тыквенный пирог"
+            android:text="@string/caterogy_item_placeholder"
             android:textSize="19sp"
             android:fontFamily="@font/didact_gothic"
             android:textAppearance="?attr/textAppearanceTitleMedium"

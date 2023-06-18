@@ -28,4 +28,5 @@
     <string name="summary">Summary</string>
     <string name="ingredients">Ingredients</string>
     <string name="instruction">Instruction</string>
+    <string name="caterogy_item_placeholder">Американский тыквенный пирог</string>
 </resources>

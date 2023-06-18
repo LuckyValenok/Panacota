@@ -1,5 +1,6 @@
 package net.panacota.app
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -13,6 +14,9 @@ class MainActivity : AppCompatActivity() {
         installSplashScreen()
 
         binding = MainActivityBinding.inflate(layoutInflater)
+
+        binding.searchView.setupWithSearchBar(binding.searchBar)
+
         setContentView(binding.root)
     }
 }
