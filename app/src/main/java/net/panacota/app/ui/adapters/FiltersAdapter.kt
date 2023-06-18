@@ -41,10 +41,14 @@ class FiltersAdapter(
             sharedPreferencesRepository.readData(filter.getApiKey())?.let { value ->
                 menu.editText?.text = Editable.Factory.getInstance().newEditable(value)
             }
+            val list: MutableList<String> =
+                filter.getValuesResources().map { root.resources.getString(it) }.toMutableList()
+            list.add(0, "")
             val arrayAdapter = ArrayAdapter(
                 context,
                 R.layout.filter_item,
-                filter.getValuesResources().map { root.resources.getString(it) })
+                list
+            )
             autoCompleteText.setAdapter(arrayAdapter)
             menu.editText?.addTextChangedListener {
                 sharedPreferencesRepository.saveData(filter.getApiKey(), it?.toString())
