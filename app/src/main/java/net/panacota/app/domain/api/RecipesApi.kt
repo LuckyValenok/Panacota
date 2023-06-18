@@ -13,7 +13,7 @@ interface RecipesApi {
      */
     @GET("complexSearch")
     suspend fun complexSearch(
-        @QueryMap query: Map<String, String>? = null
+        @QueryMap query: Map<String, String>
     ): Response<ListRecipe>
 
     companion object {

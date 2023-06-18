@@ -7,19 +7,19 @@ import androidx.room.Room
 import dagger.*
 import dagger.multibindings.IntoMap
 import net.panacota.app.BuildConfig
+import net.panacota.app.MainActivity
 import net.panacota.app.domain.api.RecipesApi
 import net.panacota.app.domain.database.RecipesDao
 import net.panacota.app.domain.database.RecipesDatabase
 import net.panacota.app.domain.repository.Repository
 import net.panacota.app.domain.repository.RepositoryImpl
-import net.panacota.app.domain.usecases.getRecipes.GetRecipesUseCase
-import net.panacota.app.domain.usecases.getRecipes.GetRecipesUseCaseImpl
-import net.panacota.app.domain.usecases.getRecipesByType.GetRecipesByTypeUseCase
-import net.panacota.app.domain.usecases.getRecipesByType.GetRecipesByTypeUseCaseImpl
+import net.panacota.app.domain.usecases.getRecipesByFilters.GetRecipesByFiltersUseCase
+import net.panacota.app.domain.usecases.getRecipesByFilters.GetRecipesByFiltersUseCaseImpl
 import net.panacota.app.ui.fragments.CategoryFragment
 import net.panacota.app.ui.fragments.MainFragment
 import net.panacota.app.ui.viewmodels.CategoryViewModel
 import net.panacota.app.ui.viewmodels.MainViewModel
+import net.panacota.app.ui.viewmodels.SearchViewModel
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -32,6 +32,8 @@ interface AppComponent {
     fun injectMainFragment(mainFragment: MainFragment)
 
     fun injectCategoryFragment(categoryFragment: CategoryFragment)
+
+    fun injectMainActivity(mainActivity: MainActivity)
 
     @Component.Factory
     interface AppComponentFactory {
@@ -53,6 +55,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(CategoryViewModel::class)
     abstract fun categoryViewModel(viewModel: CategoryViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SearchViewModel::class)
+    abstract fun searchViewModel(viewModel: SearchViewModel): ViewModel
 }
 
 @Module
@@ -114,9 +121,5 @@ abstract class NetworkModule {
 
     @Binds
     @Singleton
-    abstract fun bindGetCardsUseCase(useCase: GetRecipesUseCaseImpl): GetRecipesUseCase
-
-    @Binds
-    @Singleton
-    abstract fun bindGetCardsByTypeUseCase(useCase: GetRecipesByTypeUseCaseImpl): GetRecipesByTypeUseCase
+    abstract fun bindGetRecipesByFiltersUseCase(useCase: GetRecipesByFiltersUseCaseImpl): GetRecipesByFiltersUseCase
 }

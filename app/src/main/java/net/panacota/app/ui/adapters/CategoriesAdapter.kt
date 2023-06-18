@@ -27,7 +27,7 @@ class CategoriesAdapter(private val onClick: (Category) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(category: Category) = with(binding) {
             categoryName.text = root.resources.getString(category.type.getStringResource())
-            recyclerInfo.adapter = RecipesAdapter(category.list)
+            recyclerInfo.adapter = RecipesAdapter(root.context, category.list)
             categoryButtonMore.setOnClickListener {
                 onClick(getItem(adapterPosition))
             }

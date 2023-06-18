@@ -49,13 +49,13 @@ class CategoryFragment : Fragment() {
                     } else {
                         mealType = it
                         binding.category.text = resources.getString(it.getStringResource())
-                        categoryViewModel.start(it)
+                        categoryViewModel.load(it)
                     }
                 }
             }
         }
 
-        val adapter = RecipesAdapter {
+        val adapter = RecipesAdapter(requireContext()) {
             it.root.layoutParams.width = LayoutParams.MATCH_PARENT
         }
         binding.apply {
@@ -75,11 +75,11 @@ class CategoryFragment : Fragment() {
 
         categoryViewModel = viewModelFactory.create(CategoryViewModel::class.java)
 
-        categoryViewModel.recipesLiveData.observe(viewLifecycleOwner) {
+        categoryViewModel.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
 
-        categoryViewModel.start(mealType)
+        categoryViewModel.load(mealType)
 
         return binding.root
     }

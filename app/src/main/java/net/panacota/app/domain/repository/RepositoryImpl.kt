@@ -8,19 +8,19 @@ import retrofit2.Response
 import javax.inject.Inject
 
 class RepositoryImpl @Inject constructor(private val recipesApi: RecipesApi) : Repository {
-    override suspend fun getRecipes(): Response<ListRecipe> = recipesApi.complexSearch()
-    override suspend fun getRecipesByType(
-            mealType: MealType,
-            @IntRange(1, 100) limit: Int,
-            @IntRange(0, 900) offset: Int
+    override suspend fun getRecipesByFilters(
+        filters: Map<String, String>,
+        @IntRange(1, 100) limit: Int,
+        @IntRange(0, 900) offset: Int
     ): Response<ListRecipe> =
-            recipesApi.complexSearch(
-                    mapOf(
-                            "type" to mealType.toString(),
-                            "addRecipeInformation" to "true",
-                            "fillIngredients" to "true",
-                            "number" to limit.toString(),
-                            "offset" to offset.toString()
-                    )
+        recipesApi.complexSearch(
+            filters.plus(
+                mapOf(
+                    "number" to limit.toString(),
+                    "offset" to offset.toString(),
+                    "addRecipeInformation" to "true",
+                    "fillIngredients" to "true"
+                )
             )
+        )
 }

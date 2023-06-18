@@ -6,10 +6,8 @@ import net.panacota.app.domain.data.MealType
 import retrofit2.Response
 
 interface Repository {
-    suspend fun getRecipes(): Response<ListRecipe>
-
-    suspend fun getRecipesByType(
-            mealType: MealType,
+    suspend fun getRecipesByFilters(
+            filters: Map<String, String>,
             @IntRange(1, 100) limit: Int,
             @IntRange(0, 900) offset: Int
     ): Response<ListRecipe>
