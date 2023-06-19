@@ -37,6 +37,7 @@ class RecipesFragment : Fragment() {
     ): View {
         val binding: CategoryAllItemsBinding =
             CategoryAllItemsBinding.inflate(inflater, container, false)
+
         val args: RecipesFragmentArgs by navArgs()
         var mealType: MealType? =
             if (args.mealType != null) MealType.valueOf(args.mealType!!) else null

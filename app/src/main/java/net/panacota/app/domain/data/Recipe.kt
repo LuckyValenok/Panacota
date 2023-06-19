@@ -9,6 +9,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import net.panacota.app.R
+import java.io.Serializable
 
 @Entity
 data class Recipe(
@@ -37,7 +38,7 @@ data class Recipe(
     val diets: List<String>,
     @SerializedName("cuisines")
     val cuisines: List<String>
-) {
+) : Serializable {
     fun toSpannableStringBuilder(resources: Resources): SpannableStringBuilder {
         val builder = SpannableStringBuilder()
         addTitleWithContent(builder, resources.getString(R.string.summary), summary)
