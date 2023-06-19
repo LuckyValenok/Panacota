@@ -17,8 +17,6 @@ data class Recipe(
     val id: Int,
     @SerializedName("extendedIngredients")
     val extendedIngredients: List<ExtendedIngredient>,
-    @SerializedName("glutenFree")
-    val glutenFree: Boolean,
     @SerializedName("image")
     val image: String,
     @SerializedName("readyInMinutes")
@@ -34,7 +32,11 @@ data class Recipe(
     @SerializedName("analyzedInstructions")
     val analyzedInstructions: List<AnalyzedInstruction>?,
     @SerializedName("dishTypes")
-    val dishTypes: List<String>
+    val dishTypes: List<String>,
+    @SerializedName("diets")
+    val diets: List<String>,
+    @SerializedName("cuisines")
+    val cuisines: List<String>
 ) {
     fun toSpannableStringBuilder(resources: Resources): SpannableStringBuilder {
         val builder = SpannableStringBuilder()

@@ -2,7 +2,6 @@ package net.panacota.app.domain.usecases.getRecipesByFilters
 
 import androidx.annotation.IntRange
 import net.panacota.app.domain.data.ListRecipe
-import net.panacota.app.domain.data.MealType
 import net.panacota.app.domain.data.Recipe
 import net.panacota.app.domain.database.RecipesDao
 import net.panacota.app.domain.repository.Repository
@@ -14,9 +13,9 @@ class GetRecipesByFiltersUseCaseImpl @Inject constructor(
         private val recipesDao: RecipesDao
 ) : GetRecipesByFiltersUseCase {
     override suspend fun invoke(
-            filters: Map<String, String>,
-            @IntRange(1, 100) limit: Int,
-            @IntRange(0, 900) offset: Int
+        filters: Map<String, String>,
+        @IntRange(1, 100) limit: Int,
+        offset: Int
     ): List<Recipe> {
         try {
             val response = repository.getRecipesByFilters(filters, limit, offset)
@@ -29,7 +28,13 @@ class GetRecipesByFiltersUseCaseImpl @Inject constructor(
             return if (filters.containsKey("query")) {
                 recipesDao.search(filters["query"]!!, limit, offset)
             } else {
-                recipesDao.getAllByDishType(filters["type"]!!, limit, offset)
+                recipesDao.getRecipesByFilters(
+                    filters["type"],
+                    filters["diet"],
+                    filters["cuisine"],
+                    limit,
+                    offset
+                )
             }
         }
         return emptyList()

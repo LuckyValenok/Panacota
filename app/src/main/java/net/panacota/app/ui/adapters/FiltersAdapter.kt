@@ -51,7 +51,11 @@ class FiltersAdapter(
             )
             autoCompleteText.setAdapter(arrayAdapter)
             menu.editText?.addTextChangedListener {
-                sharedPreferencesRepository.saveData(filter.getApiKey(), it?.toString())
+                val value = it?.toString()
+                sharedPreferencesRepository.saveData(
+                    filter.getApiKey(),
+                    if (arrayAdapter.getPosition(value) == 0) null else value
+                )
             }
         }
     }

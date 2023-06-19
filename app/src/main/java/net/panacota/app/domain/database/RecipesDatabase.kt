@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import net.panacota.app.domain.data.Recipe
 
-@Database(entities = [Recipe::class], version = 1)
+@Database(entities = [Recipe::class], version = 2)
 @TypeConverters(RecipesConverter::class)
 abstract class RecipesDatabase : RoomDatabase() {
     abstract fun recipesDao(): RecipesDao

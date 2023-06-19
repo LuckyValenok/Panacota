@@ -15,10 +15,10 @@ import net.panacota.app.domain.repository.Repository
 import net.panacota.app.domain.repository.RepositoryImpl
 import net.panacota.app.domain.usecases.getRecipesByFilters.GetRecipesByFiltersUseCase
 import net.panacota.app.domain.usecases.getRecipesByFilters.GetRecipesByFiltersUseCaseImpl
-import net.panacota.app.ui.fragments.RecipesFragment
 import net.panacota.app.ui.fragments.MainFragment
-import net.panacota.app.ui.viewmodels.RecipesViewModel
+import net.panacota.app.ui.fragments.RecipesFragment
 import net.panacota.app.ui.viewmodels.MainViewModel
+import net.panacota.app.ui.viewmodels.RecipesViewModel
 import net.panacota.app.ui.viewmodels.SearchViewModel
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -109,7 +109,11 @@ abstract class NetworkModule {
 
         @Provides
         fun provideRecipesDatabase(context: Context): RecipesDatabase =
-            Room.databaseBuilder(context.applicationContext, RecipesDatabase::class.java, RecipesDatabase.NAME).build()
+            Room.databaseBuilder(
+                context.applicationContext,
+                RecipesDatabase::class.java,
+                RecipesDatabase.NAME
+            ).fallbackToDestructiveMigration().build()
 
         @Provides
         fun provideDao(recipesDatabase: RecipesDatabase): RecipesDao = recipesDatabase.recipesDao()
