@@ -21,7 +21,6 @@ class GetRecipesByFiltersUseCaseImpl @Inject constructor(
             val response = repository.getRecipesByFilters(filters, limit, offset)
             if (response.isSuccessful) {
                 val recipes: ListRecipe = response.body()!!
-                recipesDao.insertRecipes(recipes.results)
                 return recipes.results
             }
         } catch (e: UnknownHostException) {
